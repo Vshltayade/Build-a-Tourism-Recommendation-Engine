@@ -78,4 +78,52 @@ add_attraction("São Paulo, Brazil", ["Pátio do Colégio", ["historical site"]]
 add_attraction("Cairo, Egypt", ["Pyramids of Giza", ["monument", "historical site"]])
 add_attraction("Cairo, Egypt", ["Egyptian Museum", ["museum"]])
 
-print(attractions)
+# print(attractions) =>
+"""[[['the Louvre', ['art', 'museum']], ['Arc de Triomphe', ['historical site', 'monument']]],
+ [['Yu Garden', ['garden', 'historcical site']], ['Yuz Museum', ['art', 'museum']], ['Oriental Pearl Tower',
+  ['skyscraper', 'viewing deck']]], [['Venice Beach', ['beach']], ['LACMA', ['art', 'museum']]], [['São Paulo Zoo',
+   ['zoo']], ['Pátio do Colégio', ['historical site']]], [['Pyramids of Giza', ['monument', 'historical site']],
+    ['Egyptian Museum', ['museum']]]]
+"""
+
+
+# We want to be able to help our traveler’s find the most interesting places in a new city for them. In order to do that
+# we need to match their interests with the possible locations in a city.
+
+# Write a function called find_attractions() that takes two parameters: destination, the name of the destination and
+# interests, a list of interests.
+
+def find_attractions(destination, interests):
+    # We’ll need the city’s destination_index to look up its attractions in our attractions table.
+    # Create a variable called destination_index and save the destination’s index to it using get_destination_index()
+    destination_index = get_destination_index(destination)
+    # Look up that destination’s attractions by indexing into attractions with destination_index.
+    # Save this into the variable attractions_in_city.
+    attractions_in_city = attractions[destination_index]
+    # Create a new list called attractions_with_interest. Make it empty when declaring it,
+    # we’ll save attractions into this list if they match one of our interests.
+    attractions_with_interest = []
+    # Create a loop over attractions_in_city saving each item in the list into the
+    # temporary variable possible_attraction.
+    for attraction in attractions_in_city:
+        possible_attraction = attraction
+        # For each attraction, retrieve the tagged information about it.
+        # The tags are all saved in the second place (index 1) in the attraction.
+        # In the body of the for loop, save the attraction’s tags into the variable attraction_tags.
+        attraction_tags = attraction[1]
+        # After retrieving the attraction tags, we want to see if any of the given interests are in attraction_tags.
+        # In order to do this, we’re going to loop through interests and check if any of them are in attraction_tags.
+        for interest in interests:
+            # For every interest in interests, check if that interest is in attraction_tags.
+            # If the interest is in the attraction_tags, append possible_attraction to attractions_with_interest.
+            if interest in attraction_tags:
+                attractions_with_interest.append(possible_attraction[0])
+    return attractions_with_interest
+
+
+# Let’s test out our function! Call find_attractions() with "Los Angeles, USA" and ['art'] as the two arguments
+# and save the results to la_arts.
+la_arts = find_attractions("Los Angeles, USA", ['art'])
+# print(la_arts) => ['LACMA']
+
+
