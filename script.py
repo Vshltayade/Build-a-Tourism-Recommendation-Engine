@@ -124,6 +124,35 @@ def find_attractions(destination, interests):
 # Let’s test out our function! Call find_attractions() with "Los Angeles, USA" and ['art'] as the two arguments
 # and save the results to la_arts.
 la_arts = find_attractions("Los Angeles, USA", ['art'])
+
+
 # print(la_arts) => ['LACMA']
 
+# Now let’s get to the main event, connecting people with the attractions that they are interested in.
 
+def get_attractions_for_traveler(traveler):
+    # Let’s separate out the traveler’s data. Save the following data:
+    # Save traveler[1] into a variable called traveler_destination.
+    # Save traveler[2] into a variable called traveler_interests.
+
+    traveler_destination = traveler[1]
+    traveler_interests = traveler[2]
+
+    # Call find_attractions() with the two arguments traveler_destination and traveler_interests.
+    # Save the results into traveler_attractions.
+
+    traveler_attractions = find_attractions(traveler_destination, traveler_interests)
+
+    # Create a new string, this is what we’ll want to show our traveler when they open our application:
+    interests_string = "Hi "
+    interests_string += traveler[0]
+    interests_string += ", we think you'll like these places around "
+    interests_string += traveler_destination + ": "
+    for attr in traveler_attractions:
+        interests_string += attr
+    return interests_string
+
+
+smills_france = get_attractions_for_traveler(['Dereck Smill', 'Paris, France', ['monument']])
+
+print(smills_france)
