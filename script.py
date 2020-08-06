@@ -156,3 +156,4 @@ def get_attractions_for_traveler(traveler):
 smills_france = get_attractions_for_traveler(['Dereck Smill', 'Paris, France', ['monument']])
 
 print(smills_france)
+# Hi Dereck Smill, we think you'll like these places around Paris, France: Arc de Triomphe
